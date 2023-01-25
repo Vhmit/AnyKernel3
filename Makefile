@@ -1,4 +1,4 @@
-NAME := UNiQuE-3.18-X00P
+NAME := Mimir-Kernel-X00P
 
 DATE := $(shell date "+%Y%m%d-%H%M")
 
