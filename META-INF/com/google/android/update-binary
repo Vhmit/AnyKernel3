@@ -25,9 +25,6 @@ ui_print() {
   done;
 }
 
-ui_print "------- M I M I R  K E R N E L-------"
-ui_print "--------KERNEL BY  V H M I T------------";
-
 ui_printfile() {
   local line losrpad;
   $BOOTMODE || [ -e /twres ] || losrpad='| '; # work around LOS Recovery eating leading whitespace
@@ -553,19 +550,24 @@ fi;
 KERNEL_STRING="$(file_getprop anykernel.sh kernel.string)";
 KERNEL_COMPILER="$(file_getprop anykernel.sh kernel.compiler)";
 KERNEL_MADE="$(file_getprop anykernel.sh kernel.made)";
+KERNEL_VERSION="$(file_getprop anykernel.sh kernel.version)";
 MESSAGE_WORD="$(file_getprop anykernel.sh message.word)";
 DEVICE_NAME="$(getprop ro.product.device)";
+ui_print "- Introducing $(file_getprop anykernel.sh kernel.string)";
+ui_print " ";
+ui_print "=======================================";
 ui_print "-- Kernel Name    : $KERNEL_STRING";
+ui_print "-- Kernel Version : $KERNEL_VERSION";
 ui_print "-- Compiler       : $KERNEL_COMPILER";
 ui_print "-- Device         : $DEVICE_NAME";
 ui_print "-- Maintainer     : $KERNEL_MADE";
-ui_print "_________________________________________________" " ";
+ui_print "=======================================";
 if [ -f version ]; then
   ui_print " ";
   ui_printfile version;
   ui_print " ";
 fi;
-ui_print "- Preparing Environment Setup ...";
+ui_print "- Installing...";
 $BB grep -oE 'AK_BASE.*' META-INF/com/google/android/updater-script >&2;
 ui_print " ";
 
@@ -577,7 +579,7 @@ do_levelcheck;
 do_vendorlevelcheck;
 
 ui_print " ";
-ui_print "Flashing $KERNEL_STRING Kernel...";
+ui_print "Flashing $KERNEL_STRING ...";
 CORE=$($BB grep -oE 'ak.*core.sh' anykernel.sh);
 [ -f tools/$CORE ] || $BB ln -s $AKHOME/tools/ak*-core.sh $AKHOME/tools/$CORE;
 PATH="$AKHOME/bin:$PATH" ZIPFILE="$3" home=$AKHOME $BB ash anykernel.sh $2;
@@ -595,11 +597,7 @@ if [ "$(file_getprop anykernel.sh do.cleanup)" == 1 ]; then
   cleanup;
 fi;
 
-ui_print "- Done";
-ui_print " " "_________________________________________________";
-ui_print " " "$MESSAGE_WORD" "_________________________________________________" " ";
-ui_print ""
-ui_print " " "THANK YOU FOR USING M I M I R"
-ui_print " " " ";
+ui_print " " " " "Done!";
+ui_print " " " " "Mimir Kernel was succesfully installed";
 export PATH="$OLD_PATH";
 unset OLD_PATH OUTFD ZIPFILE;
