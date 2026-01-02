@@ -4,7 +4,9 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=N0kramel by GustavoMends
+kernel.string=Mimir Kernel
+kernel.made=Vhmit
+kernel.version=4.19.325
 do.devicecheck=1
 do.modules=0
 do.systemless=1
@@ -15,7 +17,7 @@ device.name2=aliothin
 device.name3=
 device.name4=
 device.name5=
-supported.versions=
+supported.versions=13.0-16.0
 '; } # end properties
 
 # shell variables
