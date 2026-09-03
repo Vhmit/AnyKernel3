@@ -14,7 +14,7 @@ do.cleanup=1
 do.cleanuponabort=0
 device.name1=deen
 device.name2=deen_sprout
-supported.versions=11.0
+supported.versions=12.0-12.1
 '; } # end properties
 
 # shell variables
